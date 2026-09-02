@@ -1,0 +1,62 @@
+name: amna_food_industries_mobile_app
+description: "Mobile app for Amna Food Industries order bookers."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  get: ^4.7.2
+  dio: ^5.8.0+1
+  flutter_secure_storage: ^9.2.4
+  flutter_dotenv: ^5.2.1
+  connectivity_plus: ^6.1.4
+  geolocator: ^13.0.4
+  image_picker: ^1.1.2
+  intl: ^0.20.2
+  url_launcher: ^6.3.2
+  flutter_map: ^8.3.1
+  latlong2: ^0.10.1
+  iconsax: ^0.0.8
+  flutter_image_compress: ^2.5.1
+  path_provider: ^2.1.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/images/icons/app_icon.png
+  min_sdk_android: 21
+  remove_alpha_ios: true
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/empty/common/
+    - assets/images/empty/order_booker/
+    - assets/images/icons/
+    - assets/images/logos/
+    - .env
+
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Inter-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700

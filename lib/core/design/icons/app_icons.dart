@@ -1,0 +1,195 @@
+import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+
+/// Semantic Iconsax icon mappings used across the app.
+///
+/// Outline icons use default Iconsax names. Filled (bulk) variants append `5`
+/// per Iconsax convention — e.g. [dashboard] / [dashboard5].
+class AppIcons {
+  AppIcons._();
+
+  // Navigation
+  static const IconData menu = Icons.menu_rounded;
+  static const IconData chevronRight = Icons.chevron_right_rounded;
+  static const IconData close = Icons.close_rounded;
+  static const IconData cameraOutlined = Icons.camera_alt_outlined;
+  static const IconData photoLibraryOutlined = Icons.photo_library_outlined;
+  static const IconData circle = Icons.circle;
+
+  static const IconData dashboard = Iconsax.home_2;
+  static const IconData dashboard5 = Iconsax.home_25;
+
+  static const IconData routes = Iconsax.map;
+  static const IconData routes5 = Iconsax.map5;
+
+  static const IconData fieldWork = Iconsax.people;
+  static const IconData fieldWork5 = Iconsax.people5;
+
+  static const IconData shops = Iconsax.shop;
+  static const IconData shops5 = Iconsax.shop5;
+
+  static const IconData addshop = Iconsax.shop_add;
+  static const IconData addshop5 = Iconsax.shop_add5;
+
+  static const IconData myshops = Iconsax.shopping_cart;
+  static const IconData myshops5 = Iconsax.shopping_cart5;
+
+  static const IconData history = Iconsax.note_2;
+  static const IconData history5 = Iconsax.note_25;
+
+  static const IconData pickups = Iconsax.truck_fast;
+
+  static const IconData orders = Iconsax.truck_time;
+
+  static const IconData deliver = Iconsax.truck_tick;
+
+  static const IconData account = Iconsax.profile_tick;
+  static const IconData account5 = Iconsax.profile_tick5;
+
+  static const IconData invoices = Iconsax.receipt;
+  static const IconData invoices5 = Iconsax.receipt5;
+
+  static const IconData deliveries = Iconsax.truck;
+
+  static const IconData returnDelivery = Iconsax.truck_remove;
+
+  static const IconData collections = Iconsax.money_recive;
+  static const IconData collections5 = Iconsax.money_recive5;
+
+  static const IconData handover = Iconsax.money_send;
+  static const IconData handover5 = Iconsax.money_send5;
+
+  // Actions
+  static const IconData back = Iconsax.arrow_left_2;
+  static const IconData back5 = Iconsax.arrow_left_25;
+  static const IconData add = Icons.add;
+  static const IconData edit = Icons.edit;
+
+  static const IconData task = Iconsax.task_square;
+  static const IconData task5 = Iconsax.task_square5;
+
+  static const IconData check = Icons.check;
+
+  static const IconData delete = Iconsax.trash;
+  static const IconData delete5 = Iconsax.trash5;
+
+  static const IconData search = Icons.search;
+
+  static const IconData arrowDown = Iconsax.arrow_down_1;
+
+  static const IconData block = Iconsax.forbidden_2;
+  static const IconData block5 = Iconsax.forbidden_25;
+
+  static const IconData pending = Iconsax.clock;
+
+  // Auth & profile
+  static const IconData email = Iconsax.sms;
+  static const IconData email5 = Iconsax.sms5;
+
+  static const IconData person = Iconsax.profile_tick;
+  static const IconData person5 = Iconsax.profile_tick5;
+
+  static const IconData personalCard = Iconsax.personalcard;
+  static const IconData personalCard5 = Iconsax.personalcard5;
+
+  static const IconData lock = Iconsax.lock;
+  static const IconData lock5 = Iconsax.lock5;
+
+  static const IconData eye = Iconsax.eye;
+  static const IconData eye5 = Iconsax.eye4;
+
+  static const IconData eyeSlash = Iconsax.eye_slash;
+  static const IconData eyeSlash5 = Iconsax.eye_slash5;
+
+  // Communication
+  static const IconData phone = Iconsax.call;
+  static const IconData phone5 = Iconsax.call5;
+
+  // Form & media
+  static const IconData calendar = Iconsax.calendar;
+  static const IconData calendar5 = Iconsax.calendar5;
+
+  static const IconData image = Iconsax.gallery;
+  static const IconData image5 = Iconsax.gallery5;
+
+  static const IconData location = Iconsax.location;
+  static const IconData location5 = Iconsax.location5;
+
+  static const IconData locationPin = Icons.location_on;
+
+  static const IconData map = Iconsax.map;
+  static const IconData map5 = Iconsax.map5;
+
+  static const IconData wallet = Iconsax.wallet;
+  static const IconData wallet5 = Iconsax.wallet5;
+
+  static const IconData cloudUpload = Iconsax.cloud_add;
+  static const IconData cloudUpload5 = Iconsax.cloud_add5;
+
+  static const IconData gps = Iconsax.gps;
+  static const IconData gps5 = Iconsax.gps5;
+
+  static const IconData userAdd = Iconsax.user_add;
+  static const IconData userAdd5 = Iconsax.user_add5;
+
+  static const IconData cameraAdd = Iconsax.camera;
+  static const IconData cameraAdd5 = Iconsax.camera5;
+
+  static const IconData language = Iconsax.translate;
+  static const IconData language5 = Iconsax.translate5;
+
+  static const IconData reportProblem = Iconsax.message_question;
+  static const IconData reportProblem5 = Iconsax.message_question5;
+
+  static const IconData vanStock = Iconsax.box;
+  static const IconData vanStock5 = Iconsax.box5;
+
+  static const IconData logout = Iconsax.logout;
+  static const IconData arrowRight = Iconsax.arrow_right_3;
+  static const IconData note = Iconsax.note_text;
+  static const IconData money = Iconsax.money;
+  static const IconData quantity = Iconsax.hashtag;
+
+  /// Returns the filled variant when [active] is true, otherwise [icon].
+  static IconData filled(IconData icon, {bool active = true}) {
+    if (!active) return icon;
+
+    return switch (icon) {
+      dashboard => dashboard5,
+      routes => routes5,
+      fieldWork => fieldWork5,
+      shops => shops5,
+      addshop => addshop5,
+      myshops => myshops5,
+      history => history5,
+      account => account5,
+      person => person5,
+      invoices => invoices5,
+      collections => collections5,
+      handover => handover5,
+      back => back5,
+      eye => eye5,
+      task => task5,
+      delete => delete5,
+      email => email5,
+      personalCard => personalCard5,
+      lock => lock5,
+      eyeSlash => eyeSlash5,
+      phone => phone5,
+      calendar => calendar5,
+      image => image5,
+      location => location5,
+      map => map5,
+      wallet => wallet5,
+      cloudUpload => cloudUpload5,
+      gps => gps5,
+      userAdd => userAdd5,
+      cameraAdd => cameraAdd5,
+      language => language5,
+      reportProblem => reportProblem5,
+      vanStock => vanStock5,
+      block => block5,
+      _ => icon,
+    };
+  }
+}
