@@ -15,6 +15,10 @@ class AppFormatter {
     return '$symbol${formatter.format(amount)}';
   }
 
+  static String dateTimeShort(DateTime value) {
+    return DateFormat('d MMM yyyy, h:mm a').format(value.toLocal());
+  }
+
   static DateTime? parseApiDateTime(dynamic raw) {
     if (raw is DateTime) return raw.toLocal();
     return ApiMap.asDateTime(raw);

@@ -11,39 +11,50 @@ enum PresenceStatus { online, away, offline }
 
 extension UserRoleX on UserRole {
   String get label => switch (this) {
-        UserRole.orderBooker => AppTexts.roleOrderBooker,
-      };
+    UserRole.orderBooker => AppTexts.roleOrderBooker,
+  };
 }
 
 extension OrderStatusX on OrderStatus {
   String get label => switch (this) {
-        OrderStatus.draft => AppTexts.orderStatusDraft,
-        OrderStatus.submitted => AppTexts.orderStatusSubmitted,
-        OrderStatus.confirmed => AppTexts.orderStatusConfirmed,
-        OrderStatus.delivered => AppTexts.orderStatusDelivered,
-        OrderStatus.cancelled => AppTexts.orderStatusCancelled,
-      };
+    OrderStatus.draft => AppTexts.orderStatusDraft,
+    OrderStatus.submitted => AppTexts.orderStatusSubmitted,
+    OrderStatus.confirmed => AppTexts.orderStatusConfirmed,
+    OrderStatus.delivered => AppTexts.orderStatusDelivered,
+    OrderStatus.cancelled => AppTexts.orderStatusCancelled,
+  };
 
   Color get chipColor => switch (this) {
-        OrderStatus.delivered => AppColors.success,
-        OrderStatus.submitted || OrderStatus.confirmed => AppColors.primary,
-        OrderStatus.cancelled => AppColors.error,
-        OrderStatus.draft => AppColors.textMuted,
-      };
+    OrderStatus.delivered => AppColors.success,
+    OrderStatus.submitted || OrderStatus.confirmed => AppColors.primary,
+    OrderStatus.cancelled => AppColors.error,
+    OrderStatus.draft => AppColors.textMuted,
+  };
+
+  /// Maps Odoo `sale.order` state to app [OrderStatus].
+  static OrderStatus fromOdooState(dynamic value) {
+    return switch (value?.toString().trim().toLowerCase()) {
+      'draft' => OrderStatus.draft,
+      'sent' => OrderStatus.submitted,
+      'sale' => OrderStatus.confirmed,
+      'cancel' || 'cancelled' => OrderStatus.cancelled,
+      _ => OrderStatus.draft,
+    };
+  }
 }
 
 extension PresenceStatusX on PresenceStatus {
   String get label => switch (this) {
-        PresenceStatus.online => AppTexts.statusOnline,
-        PresenceStatus.away => AppTexts.statusAway,
-        PresenceStatus.offline => AppTexts.statusOffline,
-      };
+    PresenceStatus.online => AppTexts.statusOnline,
+    PresenceStatus.away => AppTexts.statusAway,
+    PresenceStatus.offline => AppTexts.statusOffline,
+  };
 
   Color get chipColor => switch (this) {
-        PresenceStatus.online => AppColors.success,
-        PresenceStatus.away => AppColors.warning,
-        PresenceStatus.offline => AppColors.textMuted,
-      };
+    PresenceStatus.online => AppColors.success,
+    PresenceStatus.away => AppColors.warning,
+    PresenceStatus.offline => AppColors.textMuted,
+  };
 
   static PresenceStatus fromApi(dynamic value) {
     final raw = value?.toString().trim().toLowerCase() ?? '';

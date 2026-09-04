@@ -4,7 +4,5 @@ import 'package:amna_food_industries_mobile_app/core/localization/app_translatio
 
 class AppTranslations extends Translations {
   @override
-  Map<String, Map<String, String>> get keys => {
-        'en_US': AppTranslationMaps.en,
-      };
+  Map<String, Map<String, String>> get keys => {'en_US': AppTranslationMaps.en};
 }

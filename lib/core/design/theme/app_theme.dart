@@ -8,33 +8,32 @@ class AppTheme {
   AppTheme._();
 
   static ThemeData get light => ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.light,
-        fontFamily: AppFonts.mainFont,
-        scaffoldBackgroundColor: AppColors.scaffoldBackground,
-        colorScheme: const ColorScheme.light(
-          primary: AppColors.primary,
-          onPrimary: AppColors.white,
-          secondary: AppColors.secondary,
-          surface: AppColors.cardDark,
-          onSurface: AppColors.textPrimary,
-          error: AppColors.error,
-        ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.transparent,
-          foregroundColor: AppColors.textPrimary,
-          elevation: 0,
-          systemOverlayStyle: AppSystemUi.overlayStyle,
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            foregroundColor: AppColors.white,
-            minimumSize: const Size(double.infinity, 52),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(28),
-            ),
-          ),
-        ),
-      );
+    useMaterial3: true,
+    brightness: Brightness.light,
+    fontFamily: AppFonts.mainFont,
+    scaffoldBackgroundColor: AppColors.scaffoldBackground,
+    colorScheme: const ColorScheme.light(
+      primary: AppColors.primary,
+      onPrimary: AppColors.white,
+      secondary: AppColors.secondary,
+      surface: AppColors.cardDark,
+      onSurface: AppColors.textPrimary,
+      error: AppColors.error,
+    ),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.primary,
+      foregroundColor: AppColors.white,
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      systemOverlayStyle: AppSystemUi.overlayStyle,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
+        minimumSize: const Size(double.infinity, 52),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+      ),
+    ),
+  );
 }

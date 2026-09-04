@@ -144,10 +144,12 @@ class AppIcons {
   static const IconData vanStock = Iconsax.box;
   static const IconData vanStock5 = Iconsax.box5;
 
-  static const IconData logout = Iconsax.logout;
+  static const IconData logout = Iconsax.logout_1;
   static const IconData arrowRight = Iconsax.arrow_right_3;
-  static const IconData note = Iconsax.note_text;
-  static const IconData money = Iconsax.money;
+  static const IconData note = Iconsax.messages;
+  static const IconData money = Iconsax.money_add;
+  static const IconData product = Iconsax.box_add;
+
   static const IconData quantity = Iconsax.hashtag;
 
   /// Returns the filled variant when [active] is true, otherwise [icon].
