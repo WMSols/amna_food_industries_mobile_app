@@ -7,11 +7,10 @@ import 'package:amna_food_industries_mobile_app/core/services/storage_service.da
 class SplashBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(
-      () => SplashController(
-        Get.find<SessionService>(),
-        Get.find<StorageService>(),
-      ),
+    // Must Get.put (not lazyPut): SplashScreen never reads `controller`, so a
+    // lazy instance would never be created and bootstrap would never run.
+    Get.put(
+      SplashController(Get.find<SessionService>(), Get.find<StorageService>()),
     );
   }
 }

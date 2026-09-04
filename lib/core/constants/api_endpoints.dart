@@ -1,9 +1,9 @@
 class ApiEndpoints {
   ApiEndpoints._();
 
-  static const authLogin = '/api/amna/v1/auth/login';
-  static const authMe = '/api/amna/v1/auth/me';
-  static const customersList = '/api/amna/v1/customers/list';
-  static const productsList = '/api/amna/v1/products/list';
-  static const salesOrdersCreate = '/api/amna/v1/sales-orders/create';
+  static const authLogin = '/api/auth/login';
+  static const customersList = '/api/customers';
+  static const productsList = '/api/products';
+  static const salesOrdersCreate = '/api/orders/create';
+  static const salesOrdersMyOrders = '/api/orders/my_orders';
 }

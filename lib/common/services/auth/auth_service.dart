@@ -27,37 +27,33 @@ class AuthService extends GetxService {
       return _loginMock(username: username, role: role);
     }
 
-    final database = _api.odooDatabase;
-    final payload = <String, dynamic>{
-      'login': username.trim(),
-      'password': password,
-      if (database.isNotEmpty) 'database': database,
-    };
+    final database = _api.odooDatabase.trim();
+    if (database.isEmpty) {
+      throw ApiException(message: 'Missing database name (db).');
+    }
 
-    final data = await _api.postData(ApiEndpoints.authLogin, data: payload);
+    final login = username.trim();
+    final data = await _api.postData(
+      ApiEndpoints.authLogin,
+      data: {'db': database, 'login': login, 'password': password},
+    );
 
-    final apiKey = data['api_key']?.toString() ??
-        data['token']?.toString() ??
-        data['access_token']?.toString() ??
-        '';
-    if (apiKey.isEmpty) {
+    final sessionId = data['session_id']?.toString() ?? '';
+    if (sessionId.isEmpty) {
       throw ApiException(
-        message: 'Login succeeded but no API key was returned.',
+        message: 'Login succeeded but no session_id was returned.',
       );
     }
 
-    final userJson = data['user'];
-    if (userJson is! Map) {
-      throw ApiException(
-        message: 'Login succeeded but user payload was missing.',
-      );
-    }
+    final user = UserModel(
+      id: data['uid']?.toString() ?? '',
+      name: data['name']?.toString().trim() ?? '',
+      email: login,
+      role: role,
+      presenceStatus: PresenceStatus.online,
+    ).withResolvedName();
 
-    final user = UserModel.fromJson(Map<String, dynamic>.from(userJson))
-        .copyWith(role: role, presenceStatus: PresenceStatus.online)
-        .withResolvedName();
-
-    await _storage.saveToken(apiKey);
+    await _storage.saveToken(sessionId);
     await _storage.saveRole(role.name);
     await _session.setSession(userModel: user, userRole: role);
     return user;
@@ -68,8 +64,9 @@ class AuthService extends GetxService {
     required UserRole role,
   }) async {
     final trimmed = username.trim();
-    final display =
-        trimmed.isEmpty ? AppTextsFallback.defaultUserName : trimmed;
+    final display = trimmed.isEmpty
+        ? AppTextsFallback.defaultUserName
+        : trimmed;
 
     final user = UserModel(
       id: 'mock-${role.name}',

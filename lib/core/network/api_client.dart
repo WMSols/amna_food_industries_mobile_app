@@ -30,14 +30,9 @@ class ApiClient extends GetxService {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          final database = dotenv.env['ODOO_DATABASE'];
-          if (database != null && database.isNotEmpty) {
-            options.headers['X-Odoo-Database'] = database;
-          }
-
-          final token = await _storage.getToken();
-          if (token != null && token.isNotEmpty) {
-            options.headers['Authorization'] = 'Bearer $token';
+          final sessionId = await _storage.getToken();
+          if (sessionId != null && sessionId.isNotEmpty) {
+            options.headers['Cookie'] = 'session_id=$sessionId';
           }
           handler.next(options);
         },
@@ -95,6 +90,14 @@ class ApiClient extends GetxService {
     } on DioException catch (e) {
       throw _mapException(e);
     }
+  }
+
+  Future<Map<String, dynamic>> getData(
+    String path, {
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    final response = await get<dynamic>(path, queryParameters: queryParameters);
+    return _envelope.unwrap(response.data);
   }
 
   Future<Map<String, dynamic>> postData(
@@ -161,6 +164,7 @@ class ApiClient extends GetxService {
 
   String? _extractMessage(dynamic data) {
     if (data is Map) {
+      if (data['error'] != null) return data['error'].toString();
       if (data['message'] != null) return data['message'].toString();
       if (data['arguments'] is List && (data['arguments'] as List).isNotEmpty) {
         return (data['arguments'] as List).first.toString();
