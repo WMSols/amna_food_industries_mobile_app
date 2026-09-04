@@ -9,23 +9,34 @@ class AppDashboardGreeting extends StatelessWidget {
     super.key,
     required this.greeting,
     required this.userName,
+    this.onPrimary = false,
   });
 
   final String greeting;
   final String userName;
 
+  /// When true, uses light text for a primary-colored header band.
+  final bool onPrimary;
+
   @override
   Widget build(BuildContext context) {
+    final subtitleColor = onPrimary
+        ? AppColors.white.withValues(alpha: 0.85)
+        : AppColors.grey;
+    final titleColor = onPrimary ? AppColors.white : AppColors.textPrimary;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           greeting,
-          style: AppTextStyles.bodyText(context).copyWith(color: AppColors.grey),
+          style: AppTextStyles.bodyText(context).copyWith(color: subtitleColor),
         ),
         Text(
           '${AppTexts.dashboardWelcome}, $userName',
-          style: AppTextStyles.heading(context),
+          style: AppTextStyles.sectionTitle(
+            context,
+          ).copyWith(color: titleColor),
         ),
       ],
     );

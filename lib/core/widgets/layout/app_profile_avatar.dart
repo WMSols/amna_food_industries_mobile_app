@@ -14,6 +14,7 @@ class AppProfileAvatar extends StatelessWidget {
     this.name = '',
     this.presenceStatus,
     this.showPresenceDot = false,
+    this.onPrimary = false,
   });
 
   final double size;
@@ -22,11 +23,18 @@ class AppProfileAvatar extends StatelessWidget {
   final PresenceStatus? presenceStatus;
   final bool showPresenceDot;
 
+  /// Light circle + primary initials for use on primary surfaces
+  /// (AppBar / [AppScaffold] header band).
+  final bool onPrimary;
+
   @override
   Widget build(BuildContext context) {
     final resolvedSize = AppResponsive.scaleSize(context, size);
     final initials = AppHelper.initialsFromName(name);
     final dotSize = (resolvedSize * 0.28).clamp(8.0, 16.0);
+    final fill = onPrimary ? AppColors.white : AppColors.primary;
+    final foreground = onPrimary ? AppColors.primary : AppColors.white;
+    final dotBorder = onPrimary ? AppColors.primary : AppColors.white;
 
     return GestureDetector(
       onTap: onTap,
@@ -39,15 +47,21 @@ class AppProfileAvatar extends StatelessWidget {
             Container(
               width: resolvedSize,
               height: resolvedSize,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.primary,
+                color: fill,
+                border: onPrimary
+                    ? Border.all(
+                        color: AppColors.white.withValues(alpha: 0.45),
+                        width: 1.5,
+                      )
+                    : null,
               ),
               alignment: Alignment.center,
               child: Text(
                 initials,
                 style: AppTextStyles.sectionTitle(context).copyWith(
-                  color: AppColors.white,
+                  color: foreground,
                   fontWeight: FontWeight.w700,
                   fontSize: resolvedSize * 0.36,
                 ),
@@ -63,7 +77,7 @@ class AppProfileAvatar extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: presenceStatus!.chipColor,
-                    border: Border.all(color: AppColors.white, width: 2),
+                    border: Border.all(color: dotBorder, width: 2),
                   ),
                 ),
               ),

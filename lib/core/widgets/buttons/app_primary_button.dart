@@ -12,6 +12,8 @@ class AppPrimaryButton extends StatelessWidget {
     this.isLoading = false,
     this.icon,
     this.labelStyle,
+    this.backgroundColor,
+    this.foregroundColor,
   });
 
   final String label;
@@ -19,16 +21,23 @@ class AppPrimaryButton extends StatelessWidget {
   final bool isLoading;
   final IconData? icon;
   final TextStyle? labelStyle;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
 
   @override
   Widget build(BuildContext context) {
+    final bg = backgroundColor ?? AppColors.primary;
+    final fg = foregroundColor ?? AppColors.white;
+
     return SizedBox(
       width: double.infinity,
       height: AppResponsive.scaleSize(context, 40),
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
+          backgroundColor: bg,
+          disabledBackgroundColor: bg.withValues(alpha: 0.7),
+          foregroundColor: fg,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppResponsive.radius(context)),
           ),
@@ -37,10 +46,7 @@ class AppPrimaryButton extends StatelessWidget {
             ? SizedBox(
                 width: AppResponsive.buttonLoaderSize(context, factor: 0.3),
                 height: AppResponsive.buttonLoaderSize(context, factor: 0.3),
-                child: const CircularProgressIndicator(
-                  strokeWidth: 2,
-                  color: AppColors.white,
-                ),
+                child: CircularProgressIndicator(strokeWidth: 2, color: fg),
               )
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -49,7 +55,7 @@ class AppPrimaryButton extends StatelessWidget {
                   if (icon != null) ...[
                     Icon(
                       icon,
-                      color: AppColors.white,
+                      color: fg,
                       size: AppResponsive.scaleSize(context, 18),
                     ),
                     SizedBox(width: AppResponsive.scaleSize(context, 8)),
@@ -57,7 +63,7 @@ class AppPrimaryButton extends StatelessWidget {
                   Text(
                     label,
                     style: (labelStyle ?? AppTextStyles.buttonText(context))
-                        .copyWith(color: AppColors.white),
+                        .copyWith(color: fg),
                   ),
                 ],
               ),
