@@ -19,26 +19,23 @@ class AuthHeaderSection extends GetView<AuthController> {
     return Padding(
       padding: AppSpacing.screenPadding(context),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
-            child: Image.asset(
-              AppImages.appLogo,
-              width: logoWidth,
-              fit: BoxFit.contain,
-            ),
-          ),
+          Image.asset(AppImages.appLogo, width: logoWidth, fit: BoxFit.contain),
           AppSpacing.vertical(context, 0.04),
           Text(
             AppTexts.signIn,
-            style: AppTextStyles.heading(context),
+            style: AppTextStyles.heading(
+              context,
+            ).copyWith(color: AppColors.textPrimary),
           ),
           AppSpacing.vertical(context, 0.005),
           Text(
             AppTexts.authWelcomeSubtitle,
-            style: AppTextStyles.bodyText(context).copyWith(
-              color: AppColors.textMuted,
-            ),
+            style: AppTextStyles.bodyText(
+              context,
+            ).copyWith(color: AppColors.grey),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

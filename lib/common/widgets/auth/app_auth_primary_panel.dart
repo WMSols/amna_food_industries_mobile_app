@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:amna_food_industries_mobile_app/common/controllers/auth/auth_controller.dart';
 import 'package:amna_food_industries_mobile_app/core/design/colors/app_colors.dart';
 import 'package:amna_food_industries_mobile_app/core/design/icons/app_icons.dart';
-import 'package:amna_food_industries_mobile_app/core/design/responsive/app_responsive.dart';
 import 'package:amna_food_industries_mobile_app/core/design/spacing/app_spacing.dart';
 import 'package:amna_food_industries_mobile_app/core/design/texts/app_texts.dart';
 import 'package:amna_food_industries_mobile_app/core/widgets/buttons/app_primary_button.dart';
@@ -17,21 +16,11 @@ class AppAuthPrimaryPanel extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    final radius = AppResponsive.radius(context, factor: 6);
-
     return Expanded(
-      child: Container(
-        width: double.infinity,
-        padding: AppSpacing.screenPadding(context).copyWith(
-          top: AppSpacing.verticalValue(context, 0.04),
-        ),
-        decoration: BoxDecoration(
-          color: AppColors.primary,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(radius),
-            bottomRight: Radius.circular(radius),
-          ),
-        ),
+      child: Padding(
+        padding: AppSpacing.screenPadding(
+          context,
+        ).copyWith(top: AppSpacing.verticalValue(context, 0.02)),
         child: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
@@ -47,12 +36,12 @@ class AppAuthPrimaryPanel extends GetView<AuthController> {
                         label: AppTexts.username,
                         hint: AppTexts.usernameHint,
                         textInputAction: TextInputAction.next,
-                        labelColor: AppColors.white,
+                        labelColor: AppColors.textPrimary,
                         textColor: AppColors.textPrimary,
-                        hintColor: AppColors.textMuted,
+                        hintColor: AppColors.grey,
                         fillColor: AppColors.white,
                         borderColor: AppColors.cardBorder,
-                        focusedBorderColor: AppColors.white,
+                        focusedBorderColor: AppColors.primary,
                       ),
                       AppSpacing.vertical(context, 0.02),
                       Obx(
@@ -68,12 +57,12 @@ class AppAuthPrimaryPanel extends GetView<AuthController> {
                               : AppIcons.eye,
                           onSuffixTap: controller.togglePasswordVisibility,
                           onSubmitted: (_) => controller.login(),
-                          labelColor: AppColors.white,
+                          labelColor: AppColors.textPrimary,
                           textColor: AppColors.textPrimary,
-                          hintColor: AppColors.textMuted,
+                          hintColor: AppColors.grey,
                           fillColor: AppColors.white,
                           borderColor: AppColors.cardBorder,
-                          focusedBorderColor: AppColors.white,
+                          focusedBorderColor: AppColors.primary,
                         ),
                       ),
                       AppSpacing.vertical(context, 0.012),
@@ -81,6 +70,10 @@ class AppAuthPrimaryPanel extends GetView<AuthController> {
                         () => AppRememberMe(
                           value: controller.rememberMe.value,
                           onChanged: controller.setRememberMe,
+                          textColor: AppColors.primary,
+                          activeColor: AppColors.primary,
+                          checkColor: AppColors.white,
+                          borderColor: AppColors.primary,
                         ),
                       ),
                       AppSpacing.vertical(context, 0.02),
@@ -93,9 +86,9 @@ class AppAuthPrimaryPanel extends GetView<AuthController> {
                       ),
                       const Spacer(),
                       AppBroughtByFooter(
-                        textColor: AppColors.white.withValues(alpha: 0.75),
-                        accentColor: AppColors.white,
-                        dividerColor: AppColors.white.withValues(alpha: 0.25),
+                        textColor: AppColors.grey,
+                        accentColor: AppColors.primary,
+                        dividerColor: AppColors.cardBorder,
                       ),
                     ],
                   ),
