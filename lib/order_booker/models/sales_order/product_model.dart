@@ -17,18 +17,19 @@ class ProductModel {
     return ProductModel(
       id: (json['id'] ?? json['product_id'])?.toString() ?? '',
       name: (json['name'] ?? json['product_name'])?.toString().trim() ?? '',
-      unitPrice: ApiMap.asDouble(
+      unitPrice:
+          ApiMap.asDouble(
             json['unit_price'] ?? json['list_price'] ?? json['price'],
           ) ??
           0,
-      uom: ApiMap.asString(json['uom'] ?? json['uom_name']),
+      uom: ApiMap.asString(json['uom'] ?? json['uom_name'] ?? json['uom_id']),
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'unit_price': unitPrice,
-        'uom': uom,
-      };
+    'id': id,
+    'name': name,
+    'unit_price': unitPrice,
+    'uom': uom,
+  };
 }

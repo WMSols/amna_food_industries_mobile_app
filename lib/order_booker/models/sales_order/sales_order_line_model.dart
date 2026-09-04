@@ -14,9 +14,9 @@ class SalesOrderLineModel {
   double get subtotal => quantity * unitPrice;
 
   Map<String, dynamic> toJson() => {
-        'product_id': productId,
-        'product_name': productName,
-        'quantity': quantity,
-        'unit_price': unitPrice,
-      };
+    'product_id': productId,
+    'product_name': productName,
+    'quantity': quantity,
+    'unit_price': unitPrice,
+  };
 }

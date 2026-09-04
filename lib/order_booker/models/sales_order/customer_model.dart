@@ -1,9 +1,5 @@
 class CustomerModel {
-  const CustomerModel({
-    required this.id,
-    required this.name,
-    this.phone,
-  });
+  const CustomerModel({required this.id, required this.name, this.phone});
 
   final String id;
   final String name;
@@ -12,7 +8,8 @@ class CustomerModel {
   factory CustomerModel.fromJson(Map<String, dynamic> json) {
     return CustomerModel(
       id: (json['id'] ?? json['customer_id'])?.toString() ?? '',
-      name: (json['name'] ?? json['display_name'] ?? json['customer_name'])
+      name:
+          (json['name'] ?? json['display_name'] ?? json['customer_name'])
               ?.toString()
               .trim() ??
           '',
@@ -20,9 +17,5 @@ class CustomerModel {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'phone': phone,
-      };
+  Map<String, dynamic> toJson() => {'id': id, 'name': name, 'phone': phone};
 }

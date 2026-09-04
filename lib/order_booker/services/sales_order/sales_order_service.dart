@@ -21,7 +21,7 @@ class SalesOrderService extends GetxService {
       return AppMockData.customers;
     }
 
-    final data = await _api.postData(ApiEndpoints.customersList);
+    final data = await _api.getData(ApiEndpoints.customersList);
     return ApiMap.listOf(data, 'customers')
         .map(CustomerModel.fromJson)
         .where((customer) => customer.id.isNotEmpty && customer.name.isNotEmpty)
@@ -34,11 +34,25 @@ class SalesOrderService extends GetxService {
       return AppMockData.products;
     }
 
-    final data = await _api.postData(ApiEndpoints.productsList);
+    final data = await _api.getData(ApiEndpoints.productsList);
     return ApiMap.listOf(data, 'products')
         .map(ProductModel.fromJson)
         .where((product) => product.id.isNotEmpty && product.name.isNotEmpty)
         .toList(growable: false);
+  }
+
+  Future<List<SalesOrderSummary>> fetchMyOrders() async {
+    if (!_api.hasBaseUrl) {
+      return List<SalesOrderSummary>.from(recentOrders);
+    }
+
+    final data = await _api.getData(ApiEndpoints.salesOrdersMyOrders);
+    final orders = ApiMap.listOf(data, 'orders')
+        .map(SalesOrderSummary.fromJson)
+        .where((order) => order.id.isNotEmpty)
+        .toList(growable: false);
+    recentOrders.assignAll(orders);
+    return orders;
   }
 
   Future<SalesOrderSummary> submitOrder(SalesOrderDraft draft) async {
@@ -46,10 +60,13 @@ class SalesOrderService extends GetxService {
       await Future.delayed(const Duration(milliseconds: 600));
       final summary = SalesOrderSummary(
         id: 'mock-${DateTime.now().millisecondsSinceEpoch}',
+        orderName: 'SO-MOCK',
         customerName: draft.customer.name,
         total: draft.total,
         status: OrderStatus.submitted,
         createdAt: DateTime.now(),
+        note: draft.notes,
+        clientOrderRef: 'MOBILE',
       );
       recentOrders.insert(0, summary);
       return summary;
@@ -61,13 +78,20 @@ class SalesOrderService extends GetxService {
     );
 
     final summary = SalesOrderSummary(
-      id: (data['id'] ?? data['order_id'])?.toString() ?? '',
-      customerName: draft.customer.name,
-      total: ApiMap.asDouble(data['total']) ?? draft.total,
-      status: OrderStatus.submitted,
+      id: (data['order_id'] ?? data['id'])?.toString() ?? '',
+      orderName: (data['order_name'] ?? data['name'])?.toString().trim() ?? '',
+      customerName: (data['partner_name'] ?? draft.customer.name)
+          .toString()
+          .trim(),
+      total:
+          ApiMap.asDouble(data['amount_total'] ?? data['total']) ?? draft.total,
+      status: OrderStatus.draft,
       createdAt: DateTime.now(),
+      note: draft.notes,
+      clientOrderRef: 'MOBILE',
     );
-    recentOrders.insert(0, summary);
+
+    await fetchMyOrders();
     return summary;
   }
 }
