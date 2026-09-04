@@ -11,43 +11,85 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
-
-# IntelliJ related
 *.iml
+Thumbs.db
+desktop.ini
+
+# IDE / editor
+.idea/
 *.ipr
 *.iws
-.idea/
+.vscode/
+*.code-workspace
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# Cursor — ignore local/agent state; keep shared project rules
+.cursor/*
+.cursor/rules/
 
-# Flutter/Dart/Pub related
+# Flutter / Dart
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
+.flutter-plugins
 .flutter-plugins-dependencies
+.packages
 .pub-cache/
 .pub/
 /build/
 /coverage/
+.fvm/
+.fvmrc
 
-# Symbolication related
+# Symbolication / obfuscation
 app.*.symbols
-
-# Obfuscation related
 app.*.map.json
 /debug-info/
 
-# Android Studio will place build artifacts here
+# Android
 /android/app/debug
 /android/app/profile
 /android/app/release
 /android/build/
+/android/.gradle/
+/android/local.properties
+/android/key.properties
+*.jks
+*.keystore
+*.apk
+*.aab
 
-# Environment
+# iOS / macOS
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/flutter.framework
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/ServiceDefinitions.json
+**/macos/Flutter/ephemeral/
+**/macos/Pods/
+**/Flutter/ephemeral/
+
+# Environment / secrets (never commit real credentials)
 .env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.mobileprovision
+credentials.json
+**/google-services.json
+**/GoogleService-Info.plist
 
-# Documentation
+# Documentation (local / staging notes)
 /documentation/
+
+# Test / tooling scratch
+/tool/
+*.tmp
+*.temp
