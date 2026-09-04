@@ -10,6 +10,7 @@ abstract class ApiEnvelope {
     return switch (style?.toLowerCase()) {
       'direct' => const DirectApiEnvelope(),
       'ok_data' => const OkDataApiEnvelope(),
+      'amna_success' => const AmnaSuccessApiEnvelope(),
       _ => const OkDataApiEnvelope(),
     };
   }
@@ -50,5 +51,30 @@ class OkDataApiEnvelope extends ApiEnvelope {
     if (data is Map) return Map<String, dynamic>.from(data);
     if (data == null) return map;
     return {'value': data};
+  }
+}
+
+/// `{ "success": true, ... }` flat Amna Foods API envelope.
+class AmnaSuccessApiEnvelope extends ApiEnvelope {
+  const AmnaSuccessApiEnvelope();
+
+  @override
+  Map<String, dynamic> unwrap(dynamic raw) {
+    if (raw is! Map) {
+      throw ApiException(message: 'Unexpected API response');
+    }
+
+    final map = Map<String, dynamic>.from(raw);
+    if (map['success'] != true) {
+      throw ApiException(
+        message:
+            map['error']?.toString() ??
+            map['message']?.toString() ??
+            'Request failed',
+        data: map,
+      );
+    }
+
+    return map;
   }
 }

@@ -27,10 +27,7 @@ class AppInitializer {
     }
     Get.put(sessionService, permanent: true);
 
-    Get.put(
-      ApiClient(storage, sessionService),
-      permanent: true,
-    );
+    Get.put(ApiClient(storage, sessionService), permanent: true);
 
     final connectivity = ConnectivityService();
     Get.put(connectivity, permanent: true);
