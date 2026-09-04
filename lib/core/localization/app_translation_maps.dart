@@ -22,7 +22,7 @@ class AppTranslationMaps {
     'usernameHint': 'Enter your username',
     'rememberMe': 'Remember me',
     'authWelcomeSubtitle': 'Order booker portal for Amna Food Industries',
-    'broughtByPrefix': 'Brought to you by',
+    'broughtByPrefix': 'Brought to you by ',
     'developerName': 'WMSols',
     'allRightsReserved': 'All rights reserved.',
     'loginSuccessful': 'Signed in successfully',
@@ -32,6 +32,7 @@ class AppTranslationMaps {
     'defaultUserName': 'Order Booker',
 
     'roleOrderBooker': 'Order Booker',
+    'orderDetails': 'Order details',
 
     'noInternet': 'No internet connection',
     'backOnline': 'Back online',
@@ -40,7 +41,7 @@ class AppTranslationMaps {
     'statusAway': 'Away',
     'statusOffline': 'Offline',
 
-    'orderStatusDraft': 'Draft',
+    'orderStatusDraft': 'Booked',
     'orderStatusSubmitted': 'Submitted',
     'orderStatusConfirmed': 'Confirmed',
     'orderStatusDelivered': 'Delivered',
@@ -49,9 +50,9 @@ class AppTranslationMaps {
     'emptyLoadFailedTitle': 'Could not load data',
 
     'dashboard': 'Dashboard',
-    'dashboardGreetingMorning': 'Good morning',
-    'dashboardGreetingAfternoon': 'Good afternoon',
-    'dashboardGreetingEvening': 'Good evening',
+    'dashboardGreetingMorning': 'Good Morning!',
+    'dashboardGreetingAfternoon': 'Good Afternoon!',
+    'dashboardGreetingEvening': 'Good Evening!',
     'dashboardWelcome': 'Welcome back',
     'createSalesOrder': 'Create Sales Order',
     'createSalesOrderSubtitle': 'Create a new Odoo sales order',
@@ -71,6 +72,7 @@ class AppTranslationMaps {
     'unitPriceHint': 'Enter unit price',
     'notes': 'Notes',
     'notesHint': 'Optional notes for this order',
+    'orderReference': 'Ref',
     'orderTotal': 'Order Total',
     'submitOrder': 'Submit Order',
     'orderSubmitted': 'Sales order submitted successfully',

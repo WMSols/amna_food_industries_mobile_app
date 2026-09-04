@@ -63,6 +63,7 @@ class AppTexts {
 
   static String get salesOrder => 'salesOrder'.tr;
   static String get salesOrderFormTitle => 'salesOrderFormTitle'.tr;
+  static String get orderDetails => 'orderDetails'.tr;
   static String get customer => 'customer'.tr;
   static String get selectCustomer => 'selectCustomer'.tr;
   static String get product => 'product'.tr;
@@ -73,6 +74,7 @@ class AppTexts {
   static String get unitPriceHint => 'unitPriceHint'.tr;
   static String get notes => 'notes'.tr;
   static String get notesHint => 'notesHint'.tr;
+  static String get orderReference => 'orderReference'.tr;
   static String get orderTotal => 'orderTotal'.tr;
   static String get submitOrder => 'submitOrder'.tr;
   static String get orderSubmitted => 'orderSubmitted'.tr;

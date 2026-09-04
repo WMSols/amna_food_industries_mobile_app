@@ -15,7 +15,10 @@ class AppColors {
   static const Color cardBorder = Color(0xFFE5E7EB);
   static const Color inputFill = Color(0xFFF3F4F6);
   static const Color lightGrey = Color(0xFFE5E7EB);
+
+  /// Info toasts / accents — same hue as [secondary] for Amna branding.
   static const Color success = Color(0xFF268E40);
+  static const Color information = secondary;
   static const Color warning = Color(0xFFFF9800);
   static const Color error = Color(0xFFA4161A);
   static const Color textPrimary = Color(0xFF1A1A2E);
