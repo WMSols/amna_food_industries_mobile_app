@@ -9,7 +9,7 @@ import 'package:amna_food_industries_mobile_app/core/design/texts/app_texts.dart
 import 'package:amna_food_industries_mobile_app/core/widgets/buttons/app_primary_button.dart';
 import 'package:amna_food_industries_mobile_app/core/widgets/cards/app_amount_summary_bar.dart';
 import 'package:amna_food_industries_mobile_app/core/widgets/feedback/app_empty_state.dart';
-import 'package:amna_food_industries_mobile_app/core/widgets/feedback/app_loader.dart';
+import 'package:amna_food_industries_mobile_app/core/widgets/feedback/app_shimmer_skeletons.dart';
 import 'package:amna_food_industries_mobile_app/core/widgets/form/app_dropdown_field.dart';
 import 'package:amna_food_industries_mobile_app/core/widgets/form/app_form_section_header.dart';
 import 'package:amna_food_industries_mobile_app/core/widgets/form/app_text_field.dart';
@@ -27,7 +27,7 @@ class SalesOrderFormScreen extends GetView<SalesOrderController> {
       title: AppTexts.salesOrderFormTitle,
       body: Obx(() {
         if (controller.isLoadingCatalog.value) {
-          return const Center(child: AppLoader());
+          return AppShimmerSkeletons.genericList(context, count: 6);
         }
 
         if (controller.loadError.value != null) {
@@ -47,9 +47,9 @@ class SalesOrderFormScreen extends GetView<SalesOrderController> {
                 child: ListView(
                   padding: AppSpacing.screenPadding(context),
                   children: [
-                    const AppFormSectionHeader(
+                    AppFormSectionHeader(
                       icon: AppIcons.orders,
-                      title: 'Order details',
+                      title: AppTexts.orderDetails,
                     ),
                     AppSpacing.vertical(context, 0.012),
                     Obx(
@@ -57,7 +57,7 @@ class SalesOrderFormScreen extends GetView<SalesOrderController> {
                         label: AppTexts.customer,
                         hint: AppTexts.selectCustomer,
                         required: true,
-                        prefixIcon: AppIcons.shops,
+                        prefixIcon: AppIcons.person,
                         value: controller.selectedCustomer.value,
                         items: controller.customers,
                         getLabel: (customer) => customer.name,
@@ -71,7 +71,7 @@ class SalesOrderFormScreen extends GetView<SalesOrderController> {
                         label: AppTexts.product,
                         hint: AppTexts.selectProduct,
                         required: true,
-                        prefixIcon: AppIcons.vanStock,
+                        prefixIcon: AppIcons.product,
                         value: controller.selectedProduct.value,
                         items: controller.products,
                         getLabel: (product) => product.name,
@@ -124,9 +124,7 @@ class SalesOrderFormScreen extends GetView<SalesOrderController> {
                 padding: AppSpacing.screenPadding(context),
                 decoration: const BoxDecoration(
                   color: AppColors.white,
-                  border: Border(
-                    top: BorderSide(color: AppColors.cardBorder),
-                  ),
+                  border: Border(top: BorderSide(color: AppColors.cardBorder)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
