@@ -134,7 +134,7 @@ abstract class AppToastColors {
     return switch (style) {
       AppToastStyle.neutral => AppColors.darkGrey,
       AppToastStyle.success => AppColors.success,
-      AppToastStyle.information => AppColors.secondary,
+      AppToastStyle.information => AppColors.information,
       AppToastStyle.warning => AppColors.warning,
       AppToastStyle.error => AppColors.error,
     };

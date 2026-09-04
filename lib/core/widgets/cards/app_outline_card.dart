@@ -37,18 +37,48 @@ class AppOutlineCard extends StatelessWidget {
     final resolvedPadding =
         padding ?? AppSpacing.symmetric(context, h: 0.02, v: 0.02);
 
-    final body = statusColor == null
-        ? Padding(padding: resolvedPadding, child: child)
-        : Stack(
-            children: [
-              AppStatusStripe(
-                color: statusColor!,
-                edge: statusStripeEdge,
-                thicknessFactor: statusStripeThicknessFactor,
+    // Content drives height. Stripe is painted beside/below without IntrinsicHeight
+    // (which can collapse tall ListView children).
+    final Widget body;
+    if (statusColor == null) {
+      body = Padding(padding: resolvedPadding, child: child);
+    } else if (statusStripeEdge == AppStatusStripeEdge.bottom) {
+      body = Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(padding: resolvedPadding, child: child),
+          ColoredBox(
+            color: statusColor!,
+            child: SizedBox(
+              height: AppSpacing.verticalValue(
+                context,
+                statusStripeThicknessFactor,
               ),
-              Padding(padding: resolvedPadding, child: child),
-            ],
-          );
+            ),
+          ),
+        ],
+      );
+    } else {
+      final stripeWidth = AppSpacing.horizontalValue(
+        context,
+        statusStripeThicknessFactor,
+      );
+      body = Stack(
+        children: [
+          Padding(padding: resolvedPadding, child: child),
+          Positioned(
+            left: 0,
+            top: 0,
+            bottom: 0,
+            child: ColoredBox(
+              color: statusColor!,
+              child: SizedBox(width: stripeWidth),
+            ),
+          ),
+        ],
+      );
+    }
 
     if (onTap == null) {
       return Container(

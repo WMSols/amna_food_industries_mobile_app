@@ -18,33 +18,46 @@ class AppStatusChip extends StatelessWidget {
   final String label;
   final Color color;
   final bool fullWidth;
+
+  /// Soft style: tinted background + colored text (vs solid fill + white text).
   final bool soft;
 
-  factory AppStatusChip.order(OrderStatus status) =>
-      AppStatusChip(label: status.label, color: status.chipColor);
+  factory AppStatusChip.order(OrderStatus status, {bool soft = false}) =>
+      AppStatusChip(label: status.label, color: status.chipColor, soft: soft);
 
   factory AppStatusChip.presence(PresenceStatus status) =>
-      AppStatusChip(label: status.label, color: status.chipColor, soft: true);
+      AppStatusChip(label: status.label, color: status.chipColor);
+
+  factory AppStatusChip.fullWidth({
+    required String label,
+    required Color color,
+  }) => AppStatusChip(label: label, color: color, fullWidth: true);
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = AppTextStyles.caption(context).copyWith(
-      fontWeight: FontWeight.w600,
-      color: soft ? color : AppColors.white,
-    );
+    final background = soft ? color.withValues(alpha: 0.2) : color;
+    final foreground = soft ? color : AppColors.white;
 
-    return Container(
+    final child = Container(
       width: fullWidth ? double.infinity : null,
-      padding: AppSpacing.symmetric(context, h: 0.012, v: 0.004),
+      padding: AppSpacing.symmetric(context, h: 0.02, v: 0.002),
+      alignment: fullWidth ? Alignment.center : null,
       decoration: BoxDecoration(
-        color: soft ? color.withValues(alpha: 0.12) : color,
-        borderRadius: BorderRadius.circular(AppResponsive.radius(context, factor: 0.5)),
+        color: background,
+        borderRadius: BorderRadius.circular(
+          AppResponsive.radius(context) * 0.5,
+        ),
       ),
       child: Text(
-        label,
+        label.toUpperCase(),
         textAlign: fullWidth ? TextAlign.center : TextAlign.start,
-        style: textStyle,
+        style: AppTextStyles.hintText(
+          context,
+        ).copyWith(color: foreground, fontWeight: FontWeight.w600),
       ),
     );
+
+    if (!fullWidth) return child;
+    return SizedBox(width: double.infinity, child: child);
   }
 }

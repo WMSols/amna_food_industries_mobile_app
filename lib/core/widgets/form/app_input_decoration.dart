@@ -21,6 +21,7 @@ class AppInputDecoration {
     TextStyle? textStyle,
     Color? focusedBorderColor,
     bool borderless = false,
+    Color? iconColor,
   }) {
     final radius = AppResponsive.radius(context, factor: 1);
     final fill = fillColor ?? AppColors.inputFill;
@@ -29,7 +30,12 @@ class AppInputDecoration {
 
     final prefix =
         prefixIconWidget ??
-        _buildPrefixIcon(context, icon: prefixIcon, text: prefixText);
+        _buildPrefixIcon(
+          context,
+          icon: prefixIcon,
+          text: prefixText,
+          iconColor: iconColor,
+        );
 
     return InputDecoration(
       hintText: hintText,
@@ -70,6 +76,7 @@ class AppInputDecoration {
     BuildContext context, {
     IconData? icon,
     String? text,
+    Color? iconColor,
   }) {
     if (icon == null && text == null) return null;
 
@@ -85,7 +92,7 @@ class AppInputDecoration {
             Icon(
               icon,
               size: AppResponsive.scaleSize(context, 20),
-              color: AppColors.black,
+              color: iconColor ?? AppColors.black,
             ),
           if (icon != null && text != null)
             SizedBox(width: AppResponsive.scaleSize(context, 4)),
